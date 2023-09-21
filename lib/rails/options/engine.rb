@@ -5,7 +5,6 @@ module Rails
 
       config.options.roots = ['config']
       config.options.paths = ['options.{yml,yaml}{.enc,}', 'options/**/*.{yml,yaml}{.enc,}']
-      config.options.encrypted_patterns = [->(path) { path.end_with? '.enc' }]
       config.options.raise_on_override = false
     end
   end
