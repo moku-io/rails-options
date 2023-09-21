@@ -1,4 +1,4 @@
-require_relative "lib/rails/options/version"
+require_relative 'lib/rails/options/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'rails-options'
@@ -18,9 +18,9 @@ Gem::Specification.new do |spec|
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir.chdir File.expand_path(__dir__) do
+    Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   end
 
-  spec.add_dependency "rails", ">= 7.0"
+  spec.add_dependency 'rails', '>= 7.0'
 end
