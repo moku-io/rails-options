@@ -1,4 +1,5 @@
 AllCops:
+  NewCops: enable
   Exclude:
     - 'bin/**'
 
@@ -201,6 +202,9 @@ Security/Eval:
 
 Security/IoMethods:
   Enabled: true
+
+Security/YAMLLoad:
+  Enabled: false
 
 Style/AccessorGrouping:
   EnforcedStyle: separated
