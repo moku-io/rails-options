@@ -5,7 +5,6 @@ Gem::Specification.new do |spec|
   spec.version = Rails::Options::VERSION
   spec.authors = ['Moku S.r.l.', 'Riccardo Agatea']
   spec.email = ['info@moku.io']
-  spec.license = 'MIT'
 
   spec.summary = 'xyz'
   spec.description = 'xyz'
@@ -14,7 +13,6 @@ Gem::Specification.new do |spec|
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://bitbucket.org/moku_team/rails-options'
-  spec.metadata['changelog_uri'] = 'https://bitbucket.org/moku_team/rails-options/src/master/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
