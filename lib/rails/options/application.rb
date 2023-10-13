@@ -1,9 +1,11 @@
+require_relative 'yaml/env_visitor'
 require_relative 'key_override_error'
 
 module Rails
   class Application
     def options
       @options ||= begin
+                     yaml_visitor = Options::EnvVisitor.create symbolize_names: true
                      Array(config.options.roots)
                        .flat_map do |root|
                          Dir
@@ -13,9 +15,9 @@ module Rails
                                full_path = Pathname(root).join(path)
                                encrypted = md[:enc].present?
                                content = if encrypted
-                                           YAML.load encrypted(full_path).read, symbolize_names: true
+                                           yaml_visitor.accept YAML.parse(encrypted(full_path).read)
                                          else
-                                           YAML.load_file full_path, symbolize_names: true
+                                           yaml_visitor.accept YAML.parse_file(full_path)
                                          end
 
                                {
