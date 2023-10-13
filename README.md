@@ -18,6 +18,20 @@ $ bundle
 
 Add YAML (`.yml` or `.yaml`) files inside the `config/options` directory, and/or a `config/options.yml` file. In `Rails.application.options` you will find all the options collected from all the files, including the credentials.
 
+Any value (or key) that is tagged with `!env/VARIABLE_NAME` will be substituted with the value of the `VARIABLE_NAME` environment variable. The value provided in the YAML file, if any, will be dropped. For example, setting `VAR="variable"`:
+
+```yaml
+a_key: !env/VAR
+```
+
+will become:
+
+```ruby
+{
+  a_key: 'variable'
+}
+```
+
 The file name can have this format:
 
 `path/to/file.<environment>.<format>.enc`
