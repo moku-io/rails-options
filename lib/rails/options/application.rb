@@ -45,7 +45,7 @@ module Rails
                        .pluck(:content)
                        .then do |hashes|
                          if config.options.raise_on_override
-                           hashes.reduce credentials.to_h do |acc, hash|
+                           hashes.reduce credentials.config do |acc, hash|
                              acc.deep_merge hash do |key, value1, value2|
                                raise Options::KeyOverrideError,
                                      'Key override while loading options: ' \
@@ -54,7 +54,7 @@ module Rails
                              end
                            end
                          else
-                           hashes.reduce(credentials.to_h, &:deep_merge)
+                           hashes.reduce(credentials.config, &:deep_merge)
                          end
                        end
                        .then do |hash|
