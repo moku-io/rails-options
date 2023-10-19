@@ -54,7 +54,7 @@ module Rails
                              end
                            end
                          else
-                           hashes.reduce(credentials.to_h) { |acc, hash| acc.deep_merge hash }
+                           hashes.reduce(credentials.to_h, &:deep_merge)
                          end
                        end
                        .then do |hash|
