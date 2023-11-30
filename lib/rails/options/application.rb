@@ -36,11 +36,10 @@ module Rails
                          base = files
                                   .find { |file| !file.key?(:environment) }
                                   .to_h
-                         specific = files
-                                      .find { |file| file[:environment] == Rails.env.to_sym }
-                                      .to_h
+                         specifics = files
+                                       .filter { |file| file[:environment] == Rails.env.to_sym }
 
-                         base.deep_merge specific.slice(:content)
+                         specifics.reduce(base) { |acc, specific| acc.deep_merge specific.slice(:content) }
                        end
                        .pluck(:content)
                        .then do |hashes|
