@@ -36,7 +36,7 @@ The file name can have this format:
 
 `path/to/file.<environment>.<format>.enc`
 
-- `<environment>` is optional. If two files have the same `path/to/file`, then the one without environment will be considered as "base" and will be overridden by the one with an environment that matches `Rails.env`. Notice that only `path/to/file` is considered for this override. In particular, a file can be encrypted and still "match".
+- `<environment>` is optional. If two files have the same `path/to/file`, then the one without environment will be considered as "base" and will be overridden by all the ones with an environment that matches `Rails.env`. Notice that only `path/to/file` is considered for this override. In particular, a file can be encrypted and still "match". The order in which the keys will be overridden is implementation specific, and any conflict will be resolved silently.
 - `<format>` can be either `.yml` or `.yaml`.
 - `enc` is optional. If it is present, the file is decrypted on the fly.
 
@@ -55,4 +55,4 @@ You can set these options in `application.rb` or in any of the `environments/*.r
 
 - `config.options.roots` : the directories in which to look for options files. You can either add to the existing array with `<<` or assign a new array. Default: `['config']`. 
 - `config.options.paths` : the `Dir.glob` patterns corresponding to the options files. They will be looked for in all the `roots` directories. Default: `['options.{yml,yaml}{.enc,}', 'options/**/*.{yml,yaml}{.enc,}']`.
-- `config.options.raise_on_override` : set this to `true` if you want an exception to be raised if any key would be set by multiple files. If this is `false` and a "conflict" happens, the behavior is undefined. Default: `false`.
+- `config.options.raise_on_override` : set this to `true` if you want an exception to be raised if any key would be set by multiple files. If this is `false` and a "conflict" happens, the behavior is undefined. This only applies to files with a different `path/to/file`, not to conflicts between the base and any environment-specific version. Default: `false`.
