@@ -21,9 +21,10 @@ module Rails
                                          end
 
                                {
-                                 path:     full_path,
-                                 filename: md[:filename],
-                                 content:  content
+                                 path:      full_path,
+                                 filename:  md[:filename],
+                                 content:   content,
+                                 encrypted: encrypted
                                }
                                  .tap do |hash|
                                    hash[:environment] = md[:env].delete_prefix('.').to_sym if md[:env].present?
@@ -33,10 +34,13 @@ module Rails
                        end
                        .group_by { |file| file[:filename] }
                        .map do |_, files|
+                         # Specifics overwrite bases, and encrypted overwrite cleartexts for each.
                          bases = files
                                    .reject { |file| file.key? :environment }
+                                   .sort_by { |file| file[:encrypted] ? 1 : 0 }
                          specifics = files
                                        .filter { |file| file[:environment] == Rails.env.to_sym }
+                                       .sort_by { |file| file[:encrypted] ? 1 : 0 }
 
                          (bases + specifics)
                            .reduce({}) { |acc, override| acc.deep_merge override[:content] }
