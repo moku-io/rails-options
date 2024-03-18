@@ -34,14 +34,13 @@ module Rails
                        .group_by { |file| file[:filename] }
                        .map do |_, files|
                          bases = files
-                                  .reject { |file| file.key?(:environment) }
+                                   .reject { |file| file.key? :environment }
                          specifics = files
                                        .filter { |file| file[:environment] == Rails.env.to_sym }
 
                          (bases + specifics)
-                           .reduce { |acc, override| acc.deep_merge override.slice(:content) }
+                           .reduce({}) { |acc, override| acc.deep_merge override[:content] }
                        end
-                       .pluck(:content)
                        .then do |hashes|
                          if config.options.raise_on_override
                            hashes.reduce credentials.config do |acc, hash|
