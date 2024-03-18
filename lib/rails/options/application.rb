@@ -33,13 +33,13 @@ module Rails
                        end
                        .group_by { |file| file[:filename] }
                        .map do |_, files|
-                         base = files
-                                  .find { |file| !file.key?(:environment) }
-                                  .to_h
+                         bases = files
+                                  .reject { |file| file.key?(:environment) }
                          specifics = files
                                        .filter { |file| file[:environment] == Rails.env.to_sym }
 
-                         specifics.reduce(base) { |acc, specific| acc.deep_merge specific.slice(:content) }
+                         (bases + specifics)
+                           .reduce { |acc, override| acc.deep_merge override.slice(:content) }
                        end
                        .pluck(:content)
                        .then do |hashes|
