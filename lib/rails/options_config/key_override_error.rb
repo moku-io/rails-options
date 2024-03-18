@@ -1,5 +1,5 @@
 module Rails
-  module Options
+  module OptionsConfig
     class KeyOverrideError < StandardError
     end
   end

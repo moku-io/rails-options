@@ -1,15 +1,15 @@
-require_relative 'lib/rails/options/version'
+require_relative 'lib/rails/options_config/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'rails-options'
-  spec.version = Rails::Options::VERSION
+  spec.name = 'rails-options_config'
+  spec.version = Rails::OptionsConfig::VERSION
   spec.authors = ['Moku S.r.l.', 'Riccardo Agatea']
   spec.email = ['info@moku.io']
   spec.license = 'MIT'
 
   spec.summary = 'A uniform interface to multiple option YAML files.'
   spec.description = 'As a project\'s size increases, its credentials file tends to become unmanageable. With Rails ' \
-                     'Options you can split the credentials into smaller separate YAML files.'
+                     'Options Config you can split the credentials into smaller separate YAML files.'
   spec.homepage = 'https://bitbucket.org/moku_team/rails-options'
   spec.required_ruby_version = '>= 2.6.0'
 

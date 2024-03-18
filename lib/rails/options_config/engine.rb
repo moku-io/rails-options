@@ -1,5 +1,5 @@
 module Rails
-  module Options
+  module OptionsConfig
     class Engine < ::Rails::Engine
       config.options = ActiveSupport::OrderedOptions.new
 

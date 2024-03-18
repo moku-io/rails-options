@@ -1,5 +1,5 @@
 module Rails
-  module Options
+  module OptionsConfig
     class EnvVisitor < Psych::Visitors::ToRuby
       def accept target
         if !target.tag.nil? && target.tag.start_with?('!env/')

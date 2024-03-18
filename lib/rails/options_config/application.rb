@@ -5,7 +5,7 @@ module Rails
   class Application
     def options
       @options ||= begin
-                     yaml_visitor = Options::EnvVisitor.create symbolize_names: true
+                     yaml_visitor = OptionsConfig::EnvVisitor.create symbolize_names: true
                      Array(config.options.roots)
                        .flat_map do |root|
                          Dir
