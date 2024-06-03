@@ -44,7 +44,7 @@ The YAML files can be encrypted: if the filename ends in `.enc`, the content wil
 
 If a filename contains an environment tag, the content will be considered only in the respective environment: `config/options/pokemon.development.yml` will only be loaded in the `development` environment.
 
-Files with the same root name will overwrite each other: environment specific files will overwrite generic ones, and encrypted files will overwrite clear text ones. This way you can provide sensible defaults in the generic files, with encryption if necessary, and override them in specific environments (for example using a `.development` gitignored file to use a local mocked server instead of the real thing).
+Files with the same root name will overwrite each other: environment specific files will overwrite generic ones, and encrypted files will overwrite clear text ones. This way you can provide sensible defaults in the generic files, with encryption if necessary, and override them in specific environments (for example using a `.development` gitignored file to use a local mocked server instead of the real thing). The values are overwritten using `Hash#deep_merge` from Active Support, so you can overwrite only selected values and keep the default for the rest.
 
 Options can also be picked up from environment variables. Any `!env/VAR` YAML tag will be substituted for the value of the `VAR` variable, anywhere in the file (even in keys). For example, setting `VAR=variable`:
 
