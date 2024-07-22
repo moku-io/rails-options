@@ -9,7 +9,7 @@ As a project's size increases, its credentials file tends to become unmanageable
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rails-options', '~> 1.0'
+gem 'rails-options_config', '~> 1.0'
 ```
 
 And then execute:
@@ -64,7 +64,7 @@ will become:
 
 You can set these options in `application.rb` or in any of the `environments/*.rb` files.
 
-- `config.options.roots` : the directories, relative to `Rails.root`, in which to look for options files. You can either add to the existing array with `<<` or assign a new array. Default: `['config']`. 
+- `config.options.roots` : the directories, relative to `Rails.root`, in which to look for options files. You can either add to the existing array with `<<` or assign a new array. Default: `['config']`.
 - `config.options.paths` : the patterns (in the format of `Dir.glob`) corresponding to the options files. They will be looked for in all the `roots` directories. Default: `['options.{yml,yaml}{.enc,}', 'options/**/*.{yml,yaml}{.enc,}']`.
 - `config.options.raise_on_override` : set this to `true` if you want an exception to be raised if any key would be set by multiple files. If this is `false` and a "conflict" happens, one key will overwrite the other, but the order is undefined. This only applies to files with a different `path/to/file`, not to conflicts between the base and any environment-specific version. Default: `false`.
 
