@@ -1,5 +1,6 @@
 require_relative 'yaml/env_visitor'
 require_relative 'key_override_error'
+require_relative 'unusable_options_error'
 
 module Rails
   class Application
@@ -15,10 +16,16 @@ module Rails
                                full_path = Pathname(root).join(path)
                                encrypted = md[:enc].present?
                                content = if encrypted
-                                           yaml_visitor.accept YAML.parse(encrypted(full_path).read)
+                                           YAML.parse encrypted(full_path).read
                                          else
-                                           yaml_visitor.accept YAML.parse_file(full_path)
+                                           YAML.parse_file full_path
                                          end
+                                           .therefore { |yaml| yaml_visitor.accept yaml }
+
+                               unless content.is_a? Hash
+                                 raise OptionsConfig::UnusableOptionsError,
+                                       "The contents of options file `#{full_path}` are unsuitable. It must be a hash."
+                               end
 
                                {
                                  path:      full_path,
@@ -49,7 +56,7 @@ module Rails
                          if config.options.raise_on_override
                            hashes.reduce credentials.config do |acc, hash|
                              acc.deep_merge hash do |key, value1, value2|
-                               raise Options::KeyOverrideError,
+                               raise OptionsConfig::KeyOverrideError,
                                      'Key override while loading options: ' \
                                      "trying to set `#{key}' to #{value2.inspect}:#{value2.class}, " \
                                      "but it is already set to #{value1.inspect}:#{value1.class}"
