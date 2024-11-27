@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency 'railties', '>= 7.0'
+  spec.add_dependency 'therefore'
 end
