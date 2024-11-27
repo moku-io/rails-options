@@ -8,6 +8,12 @@
 ### Bug fixes
 )-->
 
+## 1.3.2 2024-11-27
+
+### Bug fixes
+
+- Added exception to notify options files incompatible with the options API.
+
 ## 1.3.1 2024-03-19
 
 Updated reference to the code repository. No code changes.
