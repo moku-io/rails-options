@@ -60,6 +60,16 @@ will become:
 }
 ```
 
+If for any reason you need to load the options for a different environment from the current one (for example, Rails creates both the development and test databases running in the `development` environment, so if you want to fill in the `config/database.yml` file using Options, you need to force the test environment when filling the respective section), you just need to pass it to `Rails.application.options`:
+
+```ruby
+# RAILS_ENV=staging rails c
+Rails.application.options # => staging options
+Rails.application.options(:production) # => production options
+```
+
+Notice that only the options for the current environment are cached, the others are loaded on call every time.
+
 ### Options
 
 You can set these options in `application.rb` or in any of the `environments/*.rb` files.
