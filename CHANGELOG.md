@@ -8,6 +8,12 @@
 ### Bug fixes
 )-->
 
+## 1.4.0 2025-07-30
+
+### New features
+
+- Added parameter to force environment.
+
 ## 1.3.2 2024-11-27
 
 ### Bug fixes
